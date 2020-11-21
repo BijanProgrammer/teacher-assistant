@@ -1,0 +1,26 @@
+@import '../../../config';
+
+:host {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: stretch;
+
+	width: 100%;
+
+	padding: 0 6rem 6rem;
+
+	.table {
+		&__body {
+			&__row {
+				[data-content='مثبت'] {
+					background: $color_green_japanese_laurel;
+				}
+
+				[data-content='منفی'] {
+					background: $color_red_flamingo;
+				}
+			}
+		}
+	}
+}

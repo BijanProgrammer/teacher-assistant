@@ -1,0 +1,23 @@
+<div class="table">
+	<div class="table__head">
+		<div class="table__head__row">
+			<span *ngFor="let cell of headCells"
+				class="table__head__row__cell">{{cell.content}}</span>
+		</div>
+	</div>
+	<div class="table__body">
+		<div *ngFor="let row of bodyRows; let i = index" class="table__body__row">
+			<span *ngFor="let cell of headCells" class="table__body__row__cell"
+				[class.editable]="cell.editable !== 'false'"
+				[attr.data-content]="extractData(row, cell.name)"
+				(click)="clickedOnCell($event, i, cell.name)">
+				{{extractData(row, cell.name)}}
+			</span>
+		</div>
+	</div>
+</div>
+
+<div #menu class="menu">
+	<span *ngFor="let item of menuItems" class="menu__item"
+		(click)="clickedOnMenuItem($event, item.name  )">{{item.name}}</span>
+</div>

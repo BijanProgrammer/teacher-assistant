@@ -3,23 +3,26 @@ import {
 	Component,
 	ElementRef,
 	HostListener,
+	Input,
 	Renderer2,
 	ViewChild,
 } from '@angular/core';
 import { DatabaseService } from '../../services/database.service';
 
 @Component({
-	selector: 'app-roll',
-	templateUrl: './roll.component.html',
-	styleUrls: ['./roll.component.scss'],
+	selector: 'app-table',
+	templateUrl: './table.component.html',
+	styleUrls: ['./table.component.scss'],
 	providers: [DatabaseService],
 })
-export class RollComponent implements AfterViewInit {
+export class TableComponent implements AfterViewInit {
 	@ViewChild('menu') menuRef: ElementRef;
 	menuElement: HTMLElement;
 
-	headCells;
-	bodyRows;
+	@Input() headCells;
+	@Input() bodyRows;
+	@Input() headName;
+	@Input() menuItems;
 
 	activeCell: {
 		rowElement: HTMLElement;
@@ -32,7 +35,10 @@ export class RollComponent implements AfterViewInit {
 		public databaseService: DatabaseService,
 		public renderer: Renderer2
 	) {
-		this.headCells = databaseService.getAll().head.rows.roll.cells;
+		this.headCells = databaseService.getAll().head.rows[
+			`${this.headName}`
+		].cells;
+
 		this.bodyRows = databaseService.getAll().body.rows;
 	}
 
@@ -79,37 +85,9 @@ export class RollComponent implements AfterViewInit {
 		});
 	}
 
-	clickedOnMenuItem(e, status: string) {
+	clickedOnMenuItem(e, content: string) {
 		e.stopPropagation();
 
-		switch (status) {
-			case 'EMPTY':
-				this.editCell('');
-				break;
-			case 'PRESENT':
-				this.editCell('حاضر');
-				break;
-			case 'ABSENT':
-				this.editCell('غایب');
-				break;
-			case 'PLUS':
-				this.editCell('مثبت');
-				break;
-			case 'MINUS':
-				this.editCell('منفی');
-				break;
-			default:
-				break;
-		}
-
-		this.closeMenu();
-	}
-
-	extractData(row, key) {
-		return row[`${key}`] || '_';
-	}
-
-	editCell(content) {
 		if (!this.activeCell) return;
 
 		this.databaseService.editCell(
@@ -117,6 +95,12 @@ export class RollComponent implements AfterViewInit {
 			this.activeCell.key,
 			content
 		);
+
+		this.closeMenu();
+	}
+
+	extractData(row, key) {
+		return row[`${key}`] || '_';
 	}
 
 	closeMenu() {
