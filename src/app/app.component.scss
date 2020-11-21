@@ -27,8 +27,10 @@
 		}
 
 		&__logo {
-			font-size: 2.8rem;
-			font-weight: 700;
+			a {
+				font-size: 2.8rem;
+				font-weight: 700;
+			}
 		}
 
 		&__nav {

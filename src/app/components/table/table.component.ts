@@ -4,25 +4,27 @@ import {
 	ElementRef,
 	HostListener,
 	Input,
+	OnInit,
 	Renderer2,
 	ViewChild,
 } from '@angular/core';
 import { DatabaseService } from '../../services/database.service';
 
 @Component({
-	selector: 'app-table',
+	selector: 'ta-table',
 	templateUrl: './table.component.html',
 	styleUrls: ['./table.component.scss'],
 	providers: [DatabaseService],
 })
-export class TableComponent implements AfterViewInit {
+export class TableComponent implements OnInit, AfterViewInit {
 	@ViewChild('menu') menuRef: ElementRef;
 	menuElement: HTMLElement;
 
-	@Input() headCells;
-	@Input() bodyRows;
 	@Input() headName;
 	@Input() menuItems;
+
+	bodyRows;
+	headCells;
 
 	activeCell: {
 		rowElement: HTMLElement;
@@ -34,12 +36,14 @@ export class TableComponent implements AfterViewInit {
 	constructor(
 		public databaseService: DatabaseService,
 		public renderer: Renderer2
-	) {
-		this.headCells = databaseService.getAll().head.rows[
+	) {}
+
+	ngOnInit() {
+		this.headCells = this.databaseService.getAll().head.rows[
 			`${this.headName}`
 		].cells;
 
-		this.bodyRows = databaseService.getAll().body.rows;
+		this.bodyRows = this.databaseService.getAll().body.rows;
 	}
 
 	ngAfterViewInit() {
@@ -77,6 +81,15 @@ export class TableComponent implements AfterViewInit {
 					'top',
 					`${e.clientY}px`
 				);
+
+				const viewHeight = Math.max(
+					document.documentElement.clientHeight || 0,
+					window.innerHeight || 0
+				);
+
+				if (e.clientY > viewHeight / 2)
+					this.renderer.addClass(this.menuElement, 'reverse');
+				else this.renderer.removeClass(this.menuElement, 'reverse');
 
 				this.renderer.addClass(this.menuElement, 'open');
 				this.renderer.addClass(this.activeCell.rowElement, 'active');

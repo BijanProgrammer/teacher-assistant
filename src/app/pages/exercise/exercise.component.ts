@@ -1,31 +1,26 @@
-import { Component, Renderer2 } from '@angular/core';
-
-import { DatabaseService } from 'src/app/services/database.service';
+import { Component } from '@angular/core';
 
 @Component({
-	selector: 'app-exercise',
+	selector: 'ta-exercise',
 	templateUrl: './exercise.component.html',
 	styleUrls: ['./exercise.component.scss'],
-	providers: [DatabaseService],
 })
 export class ExerciseComponent {
-	headCells;
-	bodyRows;
+	menuItems;
 
-	constructor(
-		public databaseService: DatabaseService,
-		public renderer: Renderer2
-	) {
-		this.headCells = databaseService.getAll().head.rows.exercise.cells;
-		this.bodyRows = databaseService.getAll().body.rows;
-	}
-
-	changedCellContent(e, rowIndex, key) {
-		console.log(e.target.textContent);
-		this.databaseService.editCell(rowIndex, key, e.target.textContent);
-	}
-
-	extractData(row, key) {
-		return row[`${key}`] || '_';
+	constructor() {
+		this.menuItems = [
+			{ name: '100' },
+			{ name: '90' },
+			{ name: '80' },
+			{ name: '70' },
+			{ name: '60' },
+			{ name: '50' },
+			{ name: '40' },
+			{ name: '30' },
+			{ name: '20' },
+			{ name: '10' },
+			{ name: '0' },
+		];
 	}
 }

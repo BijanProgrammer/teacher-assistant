@@ -19,5 +19,7 @@
 
 <div #menu class="menu">
 	<span *ngFor="let item of menuItems" class="menu__item"
-		(click)="clickedOnMenuItem($event, item.name  )">{{item.name}}</span>
+		(click)="clickedOnMenuItem($event, item.name)">{{item.name}}</span>
+
+	<span class="menu__item" (click)="clickedOnMenuItem($event, '')">خالی</span>
 </div>
