@@ -26,8 +26,6 @@ export class DatabaseService {
 	}
 
 	editCell(rowIndex: number, key: string, content: string) {
-		console.log(rowIndex);
-
 		this.database.roll.body.rows[rowIndex][`${key}`] = content;
 		this.save();
 	}

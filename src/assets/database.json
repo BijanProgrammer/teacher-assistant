@@ -19,23 +19,23 @@
 						"editable": "false"
 					},
 					{
-						"name": "aban28",
+						"name": "aban_28",
 						"content": "28 آبان"
 					},
 					{
-						"name": "azar5",
+						"name": "azar_5",
 						"content": "5 آذر"
 					},
 					{
-						"name": "azar12",
+						"name": "azar_12",
 						"content": "12 آذر"
 					},
 					{
-						"name": "azar19",
+						"name": "azar_19",
 						"content": "19 آذر"
 					},
 					{
-						"name": "azar26",
+						"name": "azar_26",
 						"content": "26 آذر"
 					}
 				]
@@ -47,127 +47,128 @@
 					"studentId": "",
 					"firstName": "سید حسین",
 					"lastName": "برقعی",
-					"aban28": "حاضر"
+					"aban_28": "حاضر"
 				},
 				{
 					"studentId": "",
 					"firstName": "علیرضا",
 					"lastName": "حسنی",
-					"aban28": "حاضر"
+					"aban_28": "حاضر"
 				},
 				{
 					"studentId": "",
 					"firstName": "محمد",
 					"lastName": "خداقلی",
-					"aban28": "حاضر"
+					"aban_28": "مثبت",
+					"azar_12": ""
 				},
 				{
 					"studentId": "",
 					"firstName": "محمد",
 					"lastName": "دانائی نیا",
-					"aban28": "حاضر"
+					"aban_28": "حاضر"
 				},
 				{
 					"studentId": "",
 					"firstName": "سجاد",
 					"lastName": "دودابی نژاد",
-					"aban28": "حاضر"
+					"aban_28": "مثبت"
 				},
 				{
 					"studentId": "",
 					"firstName": "محمدامین",
 					"lastName": "ربانی فر",
-					"aban28": "حاضر"
+					"aban_28": "حاضر"
 				},
 				{
 					"studentId": "",
 					"firstName": "محمدجواد",
 					"lastName": "رحیمی",
-					"aban28": "حاضر"
+					"aban_28": "مثبت"
 				},
 				{
 					"studentId": "",
 					"firstName": "امیررضا",
 					"lastName": "رضائی",
-					"aban28": "حاضر"
+					"aban_28": "حاضر"
 				},
 				{
 					"studentId": "",
 					"firstName": "عیلرضا",
 					"lastName": "رضائی",
-					"aban28": "حاضر"
+					"aban_28": "مثبت"
 				},
 				{
 					"studentId": "",
 					"firstName": "علیرضا",
 					"lastName": "رقابی",
-					"aban28": "حاضر"
+					"aban_28": "مثبت"
 				},
 				{
 					"studentId": "",
 					"firstName": "محمدمهدی",
 					"lastName": "شکرانه",
-					"aban28": "حاضر"
+					"aban_28": "حاضر"
 				},
 				{
 					"studentId": "",
 					"firstName": "مبینا",
 					"lastName": "صفائی",
-					"aban28": "حاضر"
+					"aban_28": "حاضر"
 				},
 				{
 					"studentId": "",
 					"firstName": "الهام",
 					"lastName": "ظهیر کاشانی",
-					"aban28": "حاضر"
+					"aban_28": "حاضر"
 				},
 				{
 					"studentId": "",
 					"firstName": "پویا",
 					"lastName": "علوی",
-					"aban28": "حاضر"
+					"aban_28": "حاضر"
 				},
 				{
 					"studentId": "",
 					"firstName": "پارسا",
 					"lastName": "فراهانی",
-					"aban28": "حاضر"
+					"aban_28": "حاضر"
 				},
 				{
 					"studentId": "",
 					"firstName": "سیده محدثه",
 					"lastName": "محمدزاده",
-					"aban28": "حاضر"
+					"aban_28": "حاضر"
 				},
 				{
 					"studentId": "",
 					"firstName": "مهدیس",
 					"lastName": "محمدی",
-					"aban28": "حاضر"
+					"aban_28": "حاضر"
 				},
 				{
 					"studentId": "",
 					"firstName": "سید ایمان",
 					"lastName": "مدرس صادقی",
-					"aban28": "حاضر"
+					"aban_28": "حاضر"
 				},
 				{
 					"studentId": "",
 					"firstName": "ماهان",
 					"lastName": "نجفی",
-					"aban28": "حاضر"
+					"aban_28": "مثبت"
 				},
 				{
 					"studentId": "",
 					"firstName": "نیما",
 					"lastName": "نیلچیان",
-					"aban28": "حاضر"
+					"aban_28": "مثبت"
 				},
 				{
 					"studentId": "",
 					"firstName": "محمدعلی",
 					"lastName": "مجتهد سلیمانی",
-					"aban28": "حاضر"
+					"aban_28": "حاضر"
 				}
 			]
 		}

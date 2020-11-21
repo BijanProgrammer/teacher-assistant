@@ -2,6 +2,7 @@ import {
 	AfterViewInit,
 	Component,
 	ElementRef,
+	HostListener,
 	Renderer2,
 	ViewChild,
 } from '@angular/core';
@@ -39,11 +40,15 @@ export class RollComponent implements AfterViewInit {
 		this.menuElement = this.menuRef.nativeElement;
 	}
 
-	extractData(row, key) {
-		return row[`${key}`] || '_';
+	@HostListener('document:click')
+	@HostListener('document:scroll')
+	clickedOnDocument() {
+		this.closeMenu();
 	}
 
 	clickedOnCell(e: MouseEvent, rowIndex, key) {
+		e.stopPropagation();
+
 		this.closeMenu();
 
 		this.headCells.forEach((cell) => {
@@ -74,7 +79,9 @@ export class RollComponent implements AfterViewInit {
 		});
 	}
 
-	clickedOnMenuItem(status: string) {
+	clickedOnMenuItem(e, status: string) {
+		e.stopPropagation();
+
 		switch (status) {
 			case 'EMPTY':
 				this.editCell('');
@@ -96,6 +103,10 @@ export class RollComponent implements AfterViewInit {
 		}
 
 		this.closeMenu();
+	}
+
+	extractData(row, key) {
+		return row[`${key}`] || '_';
 	}
 
 	editCell(content) {

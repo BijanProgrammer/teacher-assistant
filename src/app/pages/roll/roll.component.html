@@ -18,10 +18,10 @@
 </div>
 
 <div #menu class="menu">
-	<span class="menu__item" (click)="clickedOnMenuItem('EMPTY')">خالی</span>
-	<span class="menu__item" (click)="clickedOnMenuItem('PRESENT')">حاضر</span>
-	<span class="menu__item" (click)="clickedOnMenuItem('ABSENT')">غایب</span>
-	<span class="menu__item" (click)="clickedOnMenuItem('PLUS')">مثبت</span>
-	<span class="menu__item" (click)="clickedOnMenuItem('MINUS')">منفی</span>
-	<span class="menu__item" (click)="clickedOnMenuItem('CANCEL')">لغو</span>
+	<span class="menu__item" (click)="clickedOnMenuItem($event, 'EMPTY')">خالی</span>
+	<span class="menu__item" (click)="clickedOnMenuItem($event, 'PRESENT')">حاضر</span>
+	<span class="menu__item" (click)="clickedOnMenuItem($event, 'ABSENT')">غایب</span>
+	<span class="menu__item" (click)="clickedOnMenuItem($event, 'PLUS')">مثبت</span>
+	<span class="menu__item" (click)="clickedOnMenuItem($event, 'MINUS')">منفی</span>
+	<span class="menu__item" (click)="clickedOnMenuItem($event, 'CANCEL')">لغو</span>
 </div>
