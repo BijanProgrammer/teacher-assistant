@@ -1,0 +1,70 @@
+@import '../../../config';
+
+:host {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+
+	width: 100%;
+
+	margin-top: 4rem;
+
+	.table {
+		&__head,
+		&__body {
+			&__row {
+				display: grid;
+				grid-template-columns: repeat(8, 1fr);
+				align-items: center;
+				justify-content: center;
+
+				&__cell {
+					display: inline-block;
+
+					text-align: center;
+				}
+			}
+		}
+
+		&__head {
+			background: $color_gray_25;
+
+			border-radius: 3rem 3rem 0 0;
+
+			overflow: hidden;
+
+			&__row {
+				&__cell {
+					padding: 1rem 4rem;
+
+					font-size: 1.8rem;
+					font-weight: 700;
+				}
+			}
+		}
+
+		&__body {
+			border: 0.1rem solid $color_gray_25;
+
+			&__row {
+				cursor: pointer;
+
+				&__cell {
+					padding: 1rem 4rem;
+
+					font-size: 1.6rem;
+
+					&:hover,
+					&:focus-within {
+						background: $color_gray_25;
+					}
+				}
+
+				&:hover,
+				&:focus-within {
+					background: $color_gray_40;
+				}
+			}
+		}
+	}
+}
