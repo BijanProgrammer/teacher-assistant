@@ -2,12 +2,46 @@
 
 :host {
 	display: flex;
-	align-items: flex-start;
-	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	justify-content: stretch;
 
 	width: 100%;
 
 	margin-top: 4rem;
+
+	.menu {
+		background: $color_gray_25;
+
+		position: absolute;
+
+		display: none;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		border-radius: 0 0.5rem 0.5rem;
+		overflow: hidden;
+
+		&__item {
+			width: 100%;
+
+			padding: 0.5rem 1rem;
+
+			font-size: 1.4rem;
+			text-align: center;
+
+			cursor: pointer;
+
+			&:hover {
+				background: $color_gray_40;
+			}
+		}
+
+		&.open {
+			display: flex;
+		}
+	}
 
 	.table {
 		&__head,
@@ -22,6 +56,8 @@
 					display: inline-block;
 
 					text-align: center;
+
+					cursor: default;
 				}
 			}
 		}
@@ -44,24 +80,38 @@
 		}
 
 		&__body {
-			border: 0.1rem solid $color_gray_25;
+			background: $color_gray_10;
+
+			border: 0.1rem solid $color_gray_40;
 
 			&__row {
-				cursor: pointer;
+				[data-content='مثبت'] {
+					background: $color_green_japanese_laurel;
+				}
+
+				[data-content='منفی'] {
+					background: $color_red_flamingo;
+				}
 
 				&__cell {
 					padding: 1rem 4rem;
 
 					font-size: 1.6rem;
 
-					&:hover,
-					&:focus-within {
-						background: $color_gray_25;
+					&.editable {
+						cursor: pointer;
+
+						&:hover,
+						&:focus-within,
+						&.active {
+							background: $color_gray_25;
+						}
 					}
 				}
 
 				&:hover,
-				&:focus-within {
+				&:focus-within,
+				&.active {
 					background: $color_gray_40;
 				}
 			}
