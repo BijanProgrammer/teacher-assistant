@@ -13,6 +13,7 @@ export class TableComponent implements OnInit, AfterViewInit {
 
 	@Input() headName;
 	@Input() menuItems;
+	@Input() filters: string [];
 
 	private database;
 
@@ -87,6 +88,16 @@ export class TableComponent implements OnInit, AfterViewInit {
 
 	extractData(row, key): string {
 		return row[`${key}`] || '_';
+	}
+
+	extractDetail(key): string | number {
+		if ([
+			'studentId',
+			'firstName',
+			'lastName'
+		].includes(key)) return '';
+
+		return this.bodyRows.filter(value => value[`${key}`] && !this.filters.includes(value[`${key}`])).length;
 	}
 
 	closeMenu(): void {

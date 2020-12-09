@@ -1,0 +1,31 @@
+@import "../../../config";
+
+:host {
+	::ng-deep {
+		.table {
+			&__body {
+				&__row {
+					[data-content="5"] {
+						background: hsl(140, 80%, 50%);
+					}
+
+					[data-content="4"] {
+						background: hsl(140, 75%, 45%);
+					}
+
+					[data-content="3"] {
+						background: hsl(140, 70%, 40%);
+					}
+
+					[data-content="2"] {
+						background: hsl(140, 70%, 35%);
+					}
+
+					[data-content="1"] {
+						background: hsl(140, 65%, 30%);
+					}
+				}
+			}
+		}
+	}
+}

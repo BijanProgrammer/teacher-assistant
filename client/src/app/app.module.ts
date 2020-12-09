@@ -8,6 +8,7 @@ import {RollComponent} from './pages/roll/roll.component';
 import {HomeComponent} from './pages/home/home.component';
 import {ExerciseComponent} from './pages/exercise/exercise.component';
 import {TableComponent} from './components/table/table.component';
+import { ExtrasComponent } from './pages/extras/extras.component';
 
 @NgModule({
 	declarations: [
@@ -15,7 +16,8 @@ import {TableComponent} from './components/table/table.component';
 		RollComponent,
 		HomeComponent,
 		ExerciseComponent,
-		TableComponent
+		TableComponent,
+		ExtrasComponent
 	],
 	imports: [
 		AppRoutingModule,
