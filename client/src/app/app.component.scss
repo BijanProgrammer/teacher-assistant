@@ -1,4 +1,4 @@
-@import '../config';
+@import "../config";
 
 :host {
 	display: grid;
@@ -10,7 +10,7 @@
 	.header {
 		display: grid;
 		grid-template-rows: 1fr;
-		grid-template-columns: auto 1fr auto;
+		grid-template-columns: 1fr 5fr 1fr;
 		align-items: center;
 		justify-content: space-between;
 

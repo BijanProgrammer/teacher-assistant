@@ -1,12 +1,13 @@
 <div *ngIf="headCells && bodyRows" class="table">
 	<div class="table__head">
-		<div class="table__head__row">
+		<div class="table__head__row" [style]="{gridTemplateColumns: gridTemplateColumns}">
 			<span *ngFor="let cell of headCells"
 			      class="table__head__row__cell">{{cell.content}}</span>
 		</div>
 	</div>
 	<div class="table__body">
-		<div *ngFor="let row of bodyRows; let i = index" class="table__body__row">
+		<div *ngFor="let row of bodyRows; let i = index" class="table__body__row"
+		     [style]="{gridTemplateColumns: gridTemplateColumns}">
 			<span *ngFor="let cell of headCells" class="table__body__row__cell"
 			      [class.editable]="cell.editable !== 'false'"
 			      [attr.data-content]="extractData(row, cell.name)"
@@ -19,7 +20,7 @@
 
 <div *ngIf="headCells && bodyRows && filters" class="table">
 	<div class="table__body">
-		<div class="table__body__row">
+		<div class="table__body__row" [style]="{gridTemplateColumns: gridTemplateColumns}">
 			<span *ngFor="let cell of headCells" class="table__body__row__cell">
 				{{extractDetail(cell.name)}}
 			</span>

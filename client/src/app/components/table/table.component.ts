@@ -14,6 +14,7 @@ export class TableComponent implements OnInit, AfterViewInit {
 	@Input() headName;
 	@Input() menuItems;
 	@Input() filters: string [];
+	@Input() gridTemplateColumns: string;
 
 	private database;
 
