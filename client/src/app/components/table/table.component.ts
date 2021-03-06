@@ -109,13 +109,10 @@ export class TableComponent implements OnInit, AfterViewInit {
 	}
 	
 	public filledCellsCount(columnKey: string): string | number {
-		if ([
-			'studentId',
-			'firstName',
-			'lastName'
-		].includes(columnKey)) return '';
+		if (columnKey in this.statics.rows) return '';
 		
-		return this.table.rows.filter(row => row[columnKey] && !this.filters.includes(row[columnKey])).length;
+		const count = this.table.rows.filter(row => row[columnKey] && !this.filters.includes(row[columnKey])).length;
+		return count !== 0 ? count : '';
 	}
 	
 	public closeMenu(): void {
