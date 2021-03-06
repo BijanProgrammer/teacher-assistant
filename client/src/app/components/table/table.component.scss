@@ -71,8 +71,12 @@
 
 						font-size: 1.6rem;
 
-						&.align-to-right {
-							text-align: right;
+						&.left {
+							justify-self: end;
+						}
+
+						&.right {
+							justify-self: start;
 						}
 
 						&.editable {

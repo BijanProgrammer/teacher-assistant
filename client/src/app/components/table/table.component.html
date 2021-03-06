@@ -2,8 +2,7 @@
 	<div class="table__head">
 		<div class="table__head__row" [style]="{gridTemplateColumns: gridTemplateColumns}">
 			<span *ngFor="let column of columns"
-				  class="table__head__row__cell"
-				  [ngClass]="column.alignment">{{column.title}}</span>
+				  class="table__head__row__cell">{{column.title}}</span>
 		</div>
 	</div>
 	<div class="table__body">

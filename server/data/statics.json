@@ -8,12 +8,14 @@
     {
       "key": "firstName",
       "title": "نام",
-      "static": true
+      "static": true,
+      "alignment": "right"
     },
     {
       "key": "lastName",
       "title": "نام خانوادگی",
-      "static": true
+      "static": true,
+      "alignment": "right"
     }
   ],
   "rows": [
