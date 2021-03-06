@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {MenuItem} from '../../models/Menu';
+import {TableKey} from '../../models/Table';
 
 @Component({
 	selector: 'ta-roll',
@@ -6,14 +8,15 @@ import { Component } from '@angular/core';
 	styleUrls: ['./roll.component.scss'],
 })
 export class RollComponent {
-	menuItems;
-
+	public tableKey: TableKey = TableKey.ROLL;
+	public menuItems: MenuItem[];
+	
 	constructor() {
 		this.menuItems = [
-			{ name: 'حاضر' },
-			{ name: 'غایب' },
-			{ name: 'مثبت' },
-			{ name: 'منفی' },
+			new MenuItem('حاضر'),
+			new MenuItem('غایب'),
+			new MenuItem('مثبت'),
+			new MenuItem('منفی'),
 		];
 	}
 }

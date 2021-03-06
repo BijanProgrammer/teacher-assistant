@@ -1,28 +1,31 @@
-<div *ngIf="headCells && bodyRows" class="table">
+<div *ngIf="table?.columns && table?.rows" class="table">
 	<div class="table__head">
 		<div class="table__head__row" [style]="{gridTemplateColumns: gridTemplateColumns}">
-			<span *ngFor="let cell of headCells"
-			      class="table__head__row__cell">{{cell.content}}</span>
+			<span *ngFor="let column of table.columns"
+				  class="table__head__row__cell"
+				  [ngClass]="column.alignment">{{column.title}}</span>
 		</div>
 	</div>
 	<div class="table__body">
-		<div *ngFor="let row of bodyRows; let i = index" class="table__body__row"
-		     [style]="{gridTemplateColumns: gridTemplateColumns}">
-			<span *ngFor="let cell of headCells" class="table__body__row__cell"
-			      [class.editable]="cell.editable !== 'false'"
-			      [attr.data-content]="extractData(row, cell.name)"
-			      (click)="clickedOnCell($event, i, cell.name)">
-				{{extractData(row, cell.name)}}
+		<div *ngFor="let row of table.rows; let i = index" class="table__body__row"
+			 [style]="{gridTemplateColumns: gridTemplateColumns}">
+			<span *ngFor="let column of table.columns" class="table__body__row__cell"
+				  [ngClass]="column.alignment"
+				  [class.editable]="true"
+				  [attr.data-content]="row[column.key]"
+				  (click)="cellClickHandler($event, i, column.key)">
+				{{row[column.key]}}
 			</span>
 		</div>
 	</div>
 </div>
 
-<div *ngIf="headCells && bodyRows && filters" class="table">
+<div *ngIf="table?.columns && table?.rows && filters" class="table">
 	<div class="table__body">
 		<div class="table__body__row" [style]="{gridTemplateColumns: gridTemplateColumns}">
-			<span *ngFor="let cell of headCells" class="table__body__row__cell">
-				{{extractDetail(cell.name)}}
+			<span *ngFor="let column of table.columns" class="table__body__row__cell"
+				  [ngClass]="column.alignment">
+				{{filledCellsCount(column.key)}}
 			</span>
 		</div>
 	</div>
@@ -30,7 +33,7 @@
 
 <div #menu class="menu">
 	<span *ngFor="let item of menuItems" class="menu__item"
-	      (click)="clickedOnMenuItem($event, item.name)">{{item.name}}</span>
+		  (click)="menuItemClickHandler($event, item.name)">{{item.name}}</span>
 
-	<span class="menu__item" (click)="clickedOnMenuItem($event, '')">خالی</span>
+	<span class="menu__item" (click)="menuItemClickHandler($event, '')">خالی</span>
 </div>

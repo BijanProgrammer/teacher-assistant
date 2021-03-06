@@ -27,7 +27,11 @@
 				justify-content: center;
 
 				&__cell {
-					display: inline-block;
+					display: inline-flex;
+					align-items: center;
+					justify-content: center;
+
+					min-width: 0;
 
 					text-align: center;
 
@@ -45,9 +49,9 @@
 
 			&__row {
 				&__cell {
-					padding: 1rem 4rem;
+					padding: 1rem 0;
 
-					font-size: 1.8rem;
+					font-size: 1.6rem;
 					font-weight: 700;
 				}
 			}
@@ -62,9 +66,13 @@
 				border-bottom: 0.1rem solid $color_gray_25;
 
 				&__cell {
-					padding: 1rem 4rem;
+					padding: 0.5rem 0;
 
 					font-size: 1.6rem;
+
+					&.align-to-right {
+						text-align: right;
+					}
 
 					&.editable {
 						cursor: pointer;

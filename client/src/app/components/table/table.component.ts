@@ -1,5 +1,14 @@
 import {AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {DatabaseService} from '../../services/database.service';
+import {Table, TableKey} from '../../models/Table';
+import {MenuItem} from '../../models/Menu';
+
+class ActiveCell {
+	public rowElement: HTMLElement;
+	public cellElement: HTMLElement;
+	public rowIndex: number;
+	public columnKey: string;
+}
 
 @Component({
 	selector: 'ta-table',
@@ -8,106 +17,100 @@ import {DatabaseService} from '../../services/database.service';
 	providers: [DatabaseService]
 })
 export class TableComponent implements OnInit, AfterViewInit {
-	@ViewChild('menu') menuRef: ElementRef;
-	menuElement: HTMLElement;
-
-	@Input() headName;
-	@Input() menuItems;
-	@Input() filters: string [];
-	@Input() gridTemplateColumns: string;
-
-	private database;
-
-	activeCell: {
-		rowElement: HTMLElement; cellElement: HTMLElement; rowIndex: number; key: string;
-	};
-
+	@ViewChild('menu') public menuRef: ElementRef;
+	public menuElement: HTMLElement;
+	
+	@Input() public tableKey: TableKey;
+	@Input() public menuItems: MenuItem[];
+	@Input() public filters: string[];
+	@Input() public gridTemplateColumns: string;
+	
+	public table: Table;
+	
+	private activeCell: ActiveCell;
+	
 	constructor(public databaseService: DatabaseService, public renderer: Renderer2) {
-		this.databaseService.getAll().subscribe((data) => {
-			this.database = data;
-		});
 	}
-
-	get headCells(): any {
-		return this.database?.head.rows[`${this.headName}`].cells;
+	
+	public ngOnInit(): void {
+		this.databaseService.loadTable(this.tableKey)
+			.subscribe(data => {
+				this.table = data;
+				console.log(data);
+			});
 	}
-
-	get bodyRows(): any {
-		return this.database?.body.rows;
-	}
-
-	ngOnInit(): void {
-	}
-
-	ngAfterViewInit(): void {
+	
+	public ngAfterViewInit(): void {
 		this.menuElement = this.menuRef.nativeElement;
 	}
-
-	@HostListener('document:click') @HostListener('document:scroll') clickedOnDocument(): void {
+	
+	@HostListener('document:click')
+	@HostListener('document:scroll')
+	public clickedOnDocument(): void {
 		this.closeMenu();
 	}
-
-	clickedOnCell(e: MouseEvent, rowIndex, key): void {
+	
+	public cellClickHandler(e: MouseEvent, rowIndex: number, columnKey: string): void {
 		e.stopPropagation();
-
+		
 		this.closeMenu();
-
-		this.headCells?.forEach((cell) => {
-			if (cell.name === key && cell.editable !== 'false') {
+		
+		for (const column of this.table?.columns) {
+			if (column.title === columnKey) {
 				this.activeCell = {
 					rowElement: (e.target as HTMLElement).parentElement,
 					cellElement: e.target as HTMLElement,
 					rowIndex,
-					key
+					columnKey
 				};
-
+				
 				this.renderer.setStyle(this.menuElement, 'left', `${e.clientX + 20}px`);
-
 				this.renderer.setStyle(this.menuElement, 'top', `${e.clientY}px`);
-
+				
 				const viewHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-
-				if (e.clientY > viewHeight / 2) this.renderer.addClass(this.menuElement, 'reverse'); else this.renderer.removeClass(this.menuElement, 'reverse');
-
+				
+				if (e.clientY > viewHeight / 2)
+					this.renderer.addClass(this.menuElement, 'reverse');
+				else
+					this.renderer.removeClass(this.menuElement, 'reverse');
+				
 				this.renderer.addClass(this.menuElement, 'open');
 				this.renderer.addClass(this.activeCell.rowElement, 'active');
 				this.renderer.addClass(this.activeCell.cellElement, 'active');
+				
+				break;
 			}
-		});
+		}
 	}
-
-	clickedOnMenuItem(e, content: string): void {
+	
+	public menuItemClickHandler(e: MouseEvent, content: string): void {
 		e.stopPropagation();
-
+		
 		if (!this.activeCell) return;
-
-		this.database.body.rows[this.activeCell.rowIndex][`${this.activeCell.key}`] = content;
-		this.databaseService.saveAll(this.database);
-
+		
+		this.table.rows[this.activeCell.rowIndex][this.activeCell.columnKey] = content;
+		this.databaseService.saveTable(this.tableKey, this.table);
+		
 		this.closeMenu();
 	}
-
-	extractData(row, key): string {
-		return row[`${key}`] || '_';
-	}
-
-	extractDetail(key): string | number {
+	
+	public filledCellsCount(columnKey: string): string | number {
 		if ([
 			'studentId',
 			'firstName',
 			'lastName'
-		].includes(key)) return '';
-
-		return this.bodyRows.filter(value => value[`${key}`] && !this.filters.includes(value[`${key}`])).length;
+		].includes(columnKey)) return '';
+		
+		return this.table.rows.filter(row => row[columnKey] && !this.filters.includes(row[columnKey])).length;
 	}
-
-	closeMenu(): void {
+	
+	public closeMenu(): void {
 		if (!this.activeCell) return;
-
+		
 		this.renderer.removeClass(this.menuElement, 'open');
 		this.renderer.removeClass(this.activeCell.rowElement, 'active');
 		this.renderer.removeClass(this.activeCell.cellElement, 'active');
-
+		
 		this.activeCell = null;
 	}
 }
