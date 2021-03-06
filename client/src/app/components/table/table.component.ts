@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {DatabaseService} from '../../services/database.service';
-import {Table, TableKey} from '../../models/Table';
+import {Column, Table, TableKey} from '../../models/Table';
 import {MenuItem} from '../../models/Menu';
 
 class ActiveCell {
@@ -25,18 +25,31 @@ export class TableComponent implements OnInit, AfterViewInit {
 	@Input() public filters: string[];
 	@Input() public gridTemplateColumns: string;
 	
-	public table: Table;
+	public table: Table = null;
+	public statics: Table = null;
+	public columns: Column[] = null;
+	public rows: object[] = null;
 	
 	private activeCell: ActiveCell;
 	
-	constructor(public databaseService: DatabaseService, public renderer: Renderer2) {
+	public constructor(public databaseService: DatabaseService, public renderer: Renderer2) {
 	}
 	
 	public ngOnInit(): void {
-		this.databaseService.loadTable(this.tableKey)
-			.subscribe(data => {
-				this.table = data;
-				console.log(data);
+		this.databaseService.loadTable(TableKey.STATICS)
+			.subscribe(statics => {
+				this.statics = statics;
+				
+				this.databaseService.loadTable(this.tableKey)
+					.subscribe(table => {
+						this.table = table;
+						
+						this.columns = [...this.statics.columns, ...this.table.columns];
+						
+						this.rows = [];
+						for (let i = 0; i < this.statics.rows.length; i++)
+							this.rows.push({...this.statics.rows[i], ...this.table.rows[i]});
+					});
 			});
 	}
 	
@@ -56,7 +69,7 @@ export class TableComponent implements OnInit, AfterViewInit {
 		this.closeMenu();
 		
 		for (const column of this.table?.columns) {
-			if (column.title === columnKey) {
+			if (column.key === columnKey && !column.static) {
 				this.activeCell = {
 					rowElement: (e.target as HTMLElement).parentElement,
 					cellElement: e.target as HTMLElement,
@@ -89,7 +102,8 @@ export class TableComponent implements OnInit, AfterViewInit {
 		if (!this.activeCell) return;
 		
 		this.table.rows[this.activeCell.rowIndex][this.activeCell.columnKey] = content;
-		this.databaseService.saveTable(this.tableKey, this.table);
+		this.rows[this.activeCell.rowIndex][this.activeCell.columnKey] = content;
+		this.databaseService.saveTable(this.tableKey, this.table).subscribe();
 		
 		this.closeMenu();
 	}

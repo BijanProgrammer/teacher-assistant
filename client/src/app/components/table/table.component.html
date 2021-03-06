@@ -1,29 +1,29 @@
-<div *ngIf="table?.columns && table?.rows" class="table">
+<div *ngIf="table && statics" class="table">
 	<div class="table__head">
 		<div class="table__head__row" [style]="{gridTemplateColumns: gridTemplateColumns}">
-			<span *ngFor="let column of table.columns"
+			<span *ngFor="let column of columns"
 				  class="table__head__row__cell"
 				  [ngClass]="column.alignment">{{column.title}}</span>
 		</div>
 	</div>
 	<div class="table__body">
-		<div *ngFor="let row of table.rows; let i = index" class="table__body__row"
+		<div *ngFor="let row of rows; let i = index" class="table__body__row"
 			 [style]="{gridTemplateColumns: gridTemplateColumns}">
-			<span *ngFor="let column of table.columns" class="table__body__row__cell"
+			<span *ngFor="let column of columns" class="table__body__row__cell"
 				  [ngClass]="column.alignment"
-				  [class.editable]="true"
-				  [attr.data-content]="row[column.key]"
+				  [class.editable]="!column.static"
+				  [attr.data-content]="row[column.key] || '-'"
 				  (click)="cellClickHandler($event, i, column.key)">
-				{{row[column.key]}}
+				{{row[column.key] || '-'}}
 			</span>
 		</div>
 	</div>
 </div>
 
-<div *ngIf="table?.columns && table?.rows && filters" class="table">
+<div *ngIf="table && statics && filters" class="table">
 	<div class="table__body">
 		<div class="table__body__row" [style]="{gridTemplateColumns: gridTemplateColumns}">
-			<span *ngFor="let column of table.columns" class="table__body__row__cell"
+			<span *ngFor="let column of columns" class="table__body__row__cell"
 				  [ngClass]="column.alignment">
 				{{filledCellsCount(column.key)}}
 			</span>

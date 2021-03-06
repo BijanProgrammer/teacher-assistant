@@ -22,6 +22,6 @@ export class DatabaseService {
 	}
 	
 	public saveTable(key: TableKey, table: Table): Observable<void> {
-		return this.http.post<void>(this.TABLES_URL, table, {headers: this.HEADERS});
+		return this.http.post<void>(this.TABLES_URL + key, table, {headers: this.HEADERS});
 	}
 }

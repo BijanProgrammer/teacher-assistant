@@ -7,8 +7,8 @@ import {AppComponent} from './app.component';
 import {RollComponent} from './pages/roll/roll.component';
 import {HomeComponent} from './pages/home/home.component';
 import {ExerciseComponent} from './pages/exercise/exercise.component';
+import {ExtrasComponent} from './pages/extras/extras.component';
 import {TableComponent} from './components/table/table.component';
-import { ExtrasComponent } from './pages/extras/extras.component';
 
 @NgModule({
 	declarations: [
@@ -16,8 +16,8 @@ import { ExtrasComponent } from './pages/extras/extras.component';
 		RollComponent,
 		HomeComponent,
 		ExerciseComponent,
-		TableComponent,
-		ExtrasComponent
+		ExtrasComponent,
+		TableComponent
 	],
 	imports: [
 		AppRoutingModule,

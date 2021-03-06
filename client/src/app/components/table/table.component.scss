@@ -10,89 +10,91 @@
 
 	padding: 0 6rem 6rem;
 
-	.table {
-		width: 100%;
+	::ng-deep {
+		.table {
+			width: 100%;
 
-		margin-bottom: 1rem;
+			margin-bottom: 1rem;
 
-		&:last-child {
-			margin-bottom: 0;
-		}
+			&:last-child {
+				margin-bottom: 0;
+			}
 
-		&__head,
-		&__body {
-			&__row {
-				display: grid;
-				align-items: center;
-				justify-content: center;
-
-				&__cell {
-					display: inline-flex;
+			&__head,
+			&__body {
+				&__row {
+					display: grid;
 					align-items: center;
 					justify-content: center;
 
-					min-width: 0;
+					&__cell {
+						display: inline-flex;
+						align-items: center;
+						justify-content: center;
 
-					text-align: center;
+						min-width: 0;
 
-					cursor: default;
-				}
-			}
-		}
+						text-align: center;
 
-		&__head {
-			background: $color_gray_25;
-
-			border-radius: 3rem 3rem 0 0;
-
-			overflow: hidden;
-
-			&__row {
-				&__cell {
-					padding: 1rem 0;
-
-					font-size: 1.6rem;
-					font-weight: 700;
-				}
-			}
-		}
-
-		&__body {
-			background: $color_gray_10;
-
-			border: 0.1rem solid $color_gray_25;
-
-			&__row {
-				border-bottom: 0.1rem solid $color_gray_25;
-
-				&__cell {
-					padding: 0.5rem 0;
-
-					font-size: 1.6rem;
-
-					&.align-to-right {
-						text-align: right;
+						cursor: default;
 					}
+				}
+			}
 
-					&.editable {
-						cursor: pointer;
+			&__head {
+				background: $color_gray_25;
 
-						&:hover,
-						&:focus-within,
-						&.active {
-							background: $color_gray_40;
+				border-radius: 3rem 3rem 0 0;
+
+				overflow: hidden;
+
+				&__row {
+					&__cell {
+						padding: 1rem 0;
+
+						font-size: 1.6rem;
+						font-weight: 700;
+					}
+				}
+			}
+
+			&__body {
+				background: $color_gray_10;
+
+				border: 0.1rem solid $color_gray_25;
+
+				&__row {
+					border-bottom: 0.1rem solid $color_gray_25;
+
+					&__cell {
+						padding: 0.5rem 0;
+
+						font-size: 1.6rem;
+
+						&.align-to-right {
+							text-align: right;
+						}
+
+						&.editable {
+							cursor: pointer;
+
+							&:hover,
+							&:focus-within,
+							&.active {
+								background: $color_gray_40;
+							}
 						}
 					}
-				}
 
-				&:hover,
-				&:focus-within,
-				&.active {
-					background: $color_gray_25;
-				}
+					&:hover,
+					&:focus-within,
+					&.active {
+						background: $color_gray_25;
+					}
 
-				&:last-child {
-					border-bottom: none;
+					&:last-child {
+						border-bottom: none;
+					}
 				}
 			}
 		}
